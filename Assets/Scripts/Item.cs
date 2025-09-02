@@ -2,21 +2,20 @@ using UnityEngine;
 
 public enum ItemType
 {
+    Default,
     DoubleJump,
     Dash,
 }
 
-public abstract class Item : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public ItemType itemType;
-
-    public abstract void ApplyEffect(GameObject player);
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            ApplyEffect(other.gameObject);
+            other.GetComponent<PlayerAbility>().GiveAbility(itemType);
             Destroy(gameObject);
         }
     }

@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1450417558953523566, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
       propertyPath: m_Name
-      value: item (1) Variant
+      value: Dash
       objectReference: {fileID: 0}
     - target: {fileID: 1481465025086392595, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.99
+      value: -1.64
       objectReference: {fileID: 0}
     - target: {fileID: 1481465025086392595, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
       propertyPath: m_LocalPosition.y
@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2754802697328131307, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
+      propertyPath: itemType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3999561081300870254, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -59,26 +63,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1450417558953523566, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3756534557578065614}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
---- !u!1 &2753476074533020265 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1450417558953523566, guid: 83acaaf7614a24e4ab2c278cec736126, type: 3}
-  m_PrefabInstance: {fileID: 3609253516737649415}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3756534557578065614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2753476074533020265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d04bf769e75b1b43b3de01cd17c674a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 0
