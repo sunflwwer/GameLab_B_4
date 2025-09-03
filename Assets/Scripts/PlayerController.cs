@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
 
     public Camera playerCamera;
+    public Material glassMaterial; // Glass 색상 메테리얼
 
 
     Rigidbody rb;
@@ -88,5 +89,17 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(targetPos);
     }
 
-    
+    // 플레이어가 어떤 오브젝트와 충돌했을 때
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ChangeToGlass"))
+        {
+            Renderer rend = collision.gameObject.GetComponent<Renderer>();
+            if (rend != null && glassMaterial != null)
+            {
+                rend.material = glassMaterial;
+            }
+        }
+    }
+
 }
