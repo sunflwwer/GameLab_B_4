@@ -891,7 +891,7 @@ GameObject:
   - component: {fileID: 4104337497810597353}
   - component: {fileID: -8869583001581310844}
   m_Layer: 0
-  m_Name: Move_Cube_Hor
+  m_Name: Move_Cube_Ver
   m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -23,7 +23,8 @@ public class ObstacleController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        startPosition = transform.position; // 시작 위치 저장
+        //오브젝트 배치 초기 위치 저장
+        startPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -69,7 +70,7 @@ public class ObstacleController : MonoBehaviour
         else if (isMoveZ)
         {
             // 시작 위치 기준 앞뒤로 이동
-            float moveZ = Mathf.PingPong(Time.time * moveSpeed, moveRange) - (moveRange / 2);
+            float moveZ = Mathf.PingPong(Time.time * moveSpeed, moveRange); // - (moveRange / 2) 제거
             Vector3 newPosition = startPosition;
             newPosition.z += moveZ;
             transform.position = newPosition;
