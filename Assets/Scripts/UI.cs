@@ -3,25 +3,18 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public TextMeshProUGUI deathCountText;
+    public TextMeshProUGUI timeText;
 
-    public TextMeshProUGUI deathCountText;  // UI Text ÄÄÆ÷³ÍÆ® ¿¬°á
-    public TextMeshProUGUI timeText;  // UI Text ÄÄÆ÷³ÍÆ® ¿¬°á
-
-    private float playTime = 0.0f;
-
-    // Update is called once per frame
     void Update()
     {
-        playTime += Time.deltaTime;
+        var gm = GameManager.Instance;
+        if (gm == null) return;
 
-        string formattedTime = playTime.ToString("F3"); // ¼Ò¼öÁ¡ 3¹øÀç ÀÚ¸®±îÁö Æ÷¸ŞÆÃ
+        // GameManagerê°€ ê´€ë¦¬í•˜ëŠ” ê°’ë§Œ ì‚¬ìš©
+        string formattedTime = gm.PlayTime.ToString("F3"); // ì†Œìˆ˜ì  3ìë¦¬
 
-        if (GameManager.Instance != null)
-        {
-            deathCountText.text = " Deaths: " + GameManager.Instance.DeathCount;
-            timeText.text = " Time: " + formattedTime;
-        }
+        deathCountText.text = "Deaths: " + gm.DeathCount;
+        timeText.text = "Time: " + formattedTime;
     }
 }
-

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float fallThreshold = -10f; // ÀÌ °ªº¸´Ù yÁÂÇ¥°¡ ÀÛ¾ÆÁö¸é ³«»ç Ã³¸®
+    public float fallThreshold = -10f; // ì´ ê°’ë³´ë‹¤ yì¢Œí‘œê°€ ì‘ì•„ì§€ë©´ ë‚™ì‚¬ ì²˜ë¦¬
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ³«»ç Ã¼Å©
+        // ë‚™ì‚¬ ì²´í¬
         if (transform.position.y < fallThreshold)
         {
             Die();
@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject); // ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ® ÆÄ±«
-        GameManager.Instance.SpawnPlayer(); // ¸®½ºÆù È£Ãâ
+        GameManager.Instance.SpawnPlayer(); // ë¦¬ìŠ¤í° í˜¸ì¶œ
     }
 }
