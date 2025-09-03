@@ -65,7 +65,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 5
   far clip plane: 1000
   field of view: 60.000004
   orthographic: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   cameraRotationSpeed: 0.05
   minPitch: -30
   maxPitch: 60
-  cameraDistance: 10
+  cameraDistance: 8
   playerCamera: {fileID: 2448682042958351134}
 --- !u!114 &6129457788529943861
 MonoBehaviour:
