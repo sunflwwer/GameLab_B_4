@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
     {
         if (isRestarting || isClearing) return;
 
+        // 게임오버 UI
+        if (UI.Instance != null)
+            UI.Instance.ShowFailText("Fail...");
+
         // 죽는 순간 DeathCount +1 (UI는 즉시 +1 상태를 보게 됨)
         DeathCount++;
         StartCoroutine(RestartCurrentSceneAfterRealtime(2f));
@@ -74,7 +78,6 @@ public class GameManager : MonoBehaviour
         isRestarting = true;
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(delay);
-
         var current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }

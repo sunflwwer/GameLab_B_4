@@ -10,6 +10,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI stageOneText;
     public TextMeshProUGUI clearText;
+    public TextMeshProUGUI failText;
 
     void Awake()
     {
@@ -40,7 +41,7 @@ public class UI : MonoBehaviour
         timeText.text = "Time: " + formattedTime;
     }
 
-    IEnumerator ShowStageOneText()
+    IEnumerator ShowStageOneText() // 스테이지 알림 텍스트 코루틴
     {
         if (stageOneText != null)
         {
@@ -51,12 +52,26 @@ public class UI : MonoBehaviour
         }
     }
 
-    public void ShowClearText(string message)
+    public void ShowClearText(string message) // 클리어 텍스트 활성화
     {
         if (clearText != null)
         {
             clearText.text = message;
             clearText.gameObject.SetActive(true);
+        }
+    }
+
+    public void ShowFailText(string message) // 게임오버 텍스트 활성화
+    {
+        if (failText != null)
+        {
+            deathCountText.gameObject.SetActive(false);
+            timeText.gameObject.SetActive(false);
+            stageOneText.gameObject.SetActive(false);
+            clearText.gameObject.SetActive(false);
+
+            failText.text = message;
+            failText.gameObject.SetActive(true);
         }
     }
 }
