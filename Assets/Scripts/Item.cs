@@ -18,8 +18,13 @@ public class Item : MonoBehaviour
     public ItemType itemType;
 
     [SerializeField] float itemRespawnTime = 3.0f;
+    [SerializeField] GameObject Model;
+    [SerializeField] float rotateSpeed = 50f;
 
-    
+    private void Update()
+    {
+        transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime, Space.World);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -33,10 +38,10 @@ public class Item : MonoBehaviour
 
     IEnumerator RespawnItem()
     {
-        GetComponent<Renderer>().enabled = false;
-        GetComponent<Collider>().enabled = false;
+        Model.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         yield return new WaitForSeconds(itemRespawnTime);
-        GetComponent<Renderer>().enabled = true;
-        GetComponent<Collider>().enabled = true;
+        Model.SetActive(true);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 }
