@@ -4,6 +4,7 @@ using System.Collections;
 
 public class PlayerAbility : MonoBehaviour
 {
+    [SerializeField] PlayerEffect playerEffect;
     [SerializeField] PlayerController PlayerController;
     [SerializeField] Material[] abilityMaterials;
     [SerializeField] float jumpForce = 20.0f;
@@ -35,6 +36,7 @@ public class PlayerAbility : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             hasDoubleJump = false;
+            playerEffect.TriggerParticle(EffectType.Jump);
             changeAbilityMaterial();
         }
     }
@@ -44,6 +46,7 @@ public class PlayerAbility : MonoBehaviour
         if (hasDash)
         {
             StartCoroutine(DashCoroutine());
+            playerEffect.TriggerParticle(EffectType.Dash);
             hasDash = false;
             changeAbilityMaterial();
         }
@@ -60,6 +63,7 @@ public class PlayerAbility : MonoBehaviour
             }
 
             // 순간이동
+            playerEffect.TriggerParticle(EffectType.Flash);
             transform.position += flashDir * flashDistance;
             hasFlash = false;
             changeAbilityMaterial();

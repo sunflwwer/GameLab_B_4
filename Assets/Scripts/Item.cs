@@ -19,11 +19,14 @@ public class Item : MonoBehaviour
 
     [SerializeField] float itemRespawnTime = 3.0f;
 
+    
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerAbility>().GiveAbility(itemType);
+            other.GetComponent<PlayerEffect>().TriggerParticle(EffectType.Implosion);
             StartCoroutine(RespawnItem());
         }
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bouncy : MonoBehaviour
 {
+    [SerializeField] PlayerEffect playerEffect;
     [SerializeField] float bounceForce = 20f;
 
     Rigidbody rb;
@@ -23,6 +24,7 @@ public class Bouncy : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             rb.AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
+            playerEffect.TriggerParticle(EffectType.Jump);
         }
     }
 }
