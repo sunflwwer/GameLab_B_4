@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private bool isRestarting = false;
     private bool isClearing = false;
 
+
     private void Awake()
     {
         if (Instance == null)
@@ -97,10 +98,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoadNextStageAfterRealtime(string stageName, float delay)
     {
+
         isClearing = true;
+
+        // 스테이지 클리어 UI
+        if (UI.Instance != null)
+            UI.Instance.ShowClearText("Stage Clear!");
+
         Time.timeScale = 0f;
+
+        // delay 동안 기다리기 (Time.timeScale 0이어도 동작)
         yield return new WaitForSecondsRealtime(delay);
 
+        // 씬 전환 전에 Time.timeScale 복구
+        Time.timeScale = 1f;
+
+        // 다음 씬 로드
         SceneManager.LoadScene(stageName);
     }
+
 }

@@ -812,14 +812,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2672993140917358372, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 2672993140917358372, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 5942380968659953994, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.41209
@@ -860,14 +852,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8496955572456758631, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    - target: {fileID: 8496955572456758631, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2354,6 +2338,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed53b69656ff41c4996ff7bb897c9727, type: 3}
+--- !u!114 &755273206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4596936207927582947, guid: a9ac1bef2caa43f41afddc710324d2e2, type: 3}
+  m_PrefabInstance: {fileID: 413520915}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7550110c09577d4193f50be348e78d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766043757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4682,8 +4677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf822c56ec8c3e947abe176a1cdf578b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7055298184620967402, guid: 4625c86e8331b044ab0642f13bda1d9e, type: 3}
-  respawnPoint: {fileID: 1780015212}
+  ui: {fileID: 755273206}
 --- !u!4 &1780015212
 Transform:
   m_ObjectHideFlags: 0
