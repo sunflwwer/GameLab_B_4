@@ -5,9 +5,13 @@ using System.Collections;
 public class PlayerAbility : MonoBehaviour
 {
     [SerializeField] PlayerController PlayerController;
+    [SerializeField] Material[] abilityMaterials;
     [SerializeField] float jumpForce = 20.0f;
 
+
+    MeshRenderer playerMaterial;
     Rigidbody rb;
+    
 
     bool hasDoubleJump = false;
     bool hasDash = false;
@@ -17,6 +21,7 @@ public class PlayerAbility : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerMaterial = GetComponent<MeshRenderer>();
     }
 
     void OnJump()
@@ -28,6 +33,7 @@ public class PlayerAbility : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             hasDoubleJump = false;
+            changeAbilityMaterial();
         }
     }
 
@@ -37,6 +43,7 @@ public class PlayerAbility : MonoBehaviour
         {
             StartCoroutine(DashCoroutine());
             hasDash = false;
+            changeAbilityMaterial();
         }
     }
 
@@ -63,12 +70,34 @@ public class PlayerAbility : MonoBehaviour
         {
             case ItemType.DoubleJump:
                 hasDoubleJump = true;
+                changeAbilityMaterial();
                 break;
             case ItemType.Dash:
                 hasDash = true;
+                changeAbilityMaterial();
                 break;
             default:
                 break;
+        }
+    }
+
+    void changeAbilityMaterial()
+    {
+        if (hasDoubleJump && hasDash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.Both];
+        }
+        else if (hasDoubleJump)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.DoubleJump];
+        }
+        else if (hasDash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.Dash];
+        }
+        else
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.Default];
         }
     }
 }
