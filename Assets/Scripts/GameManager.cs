@@ -1,14 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement; // ì”¬ ë¡œë“œìš© ë„¤ì„ìŠ¤í˜ì´ìŠ¤
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     public static GameManager Instance;
 
-    public GameObject playerPrefab;   // ÇÃ·¹ÀÌ¾î ÇÁ¸®ÆÕ
-    public Transform respawnPoint;    // ¸®½ºÆù À§Ä¡(ºó ¿ÀºêÁ§Æ® µîÀ¸·Î ¼³Á¤)
-    public int DeathCount { get; private set; } = 0; // Á×À½ È½¼ö
+    public GameObject playerPrefab;   // í”Œë ˆì´ì–´ í”„ë¦¬íŒ¹ (ì§€ê¸ˆì€ ì‚¬ìš© ì•ˆ í•¨)
+    public Transform respawnPoint;    // ë¦¬ìŠ¤í° ìœ„ì¹˜ (ì§€ê¸ˆì€ ì‚¬ìš© ì•ˆ í•¨)
+    public int DeathCount { get; private set; } = 0; // ì£½ìŒ íšŸìˆ˜
 
     private void Awake()
     {
@@ -23,14 +22,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // ÇÃ·¹ÀÌ¾î »ı¼º ÇÔ¼ö
+    // í”Œë ˆì´ì–´ ì‚¬ë§ ì‹œ í˜¸ì¶œ â†’ ì”¬ ë¦¬ë¡œë“œ
     public void SpawnPlayer()
     {
-        if (playerPrefab != null && respawnPoint != null)
-        {
-            Instantiate(playerPrefab, respawnPoint.position, respawnPoint.rotation);
-            DeathCount++;
-        }
+        DeathCount++;
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
-
 }
