@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84092435b84cfb84bbb54362c6e15bae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEffect: {fileID: 0}
+  playerEffect: {fileID: 3474966808369043931}
   bounceForce: 20
 --- !u!114 &5012951905398577271
 MonoBehaviour:
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac679d5ab3b99414fa7c725a8b6148fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerEffect: {fileID: 0}
+  playerEffect: {fileID: 3474966808369043931}
   PlayerController: {fileID: 5120960257081410381}
   abilityMaterials:
   - {fileID: 2100000, guid: 7dc78346a6d74e64eba3c6a6d32b0fb2, type: 2}
