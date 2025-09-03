@@ -3764,7 +3764,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2259268508718030581, guid: 4625c86e8331b044ab0642f13bda1d9e, type: 3}
       propertyPath: bounceForce
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2259268508718030581, guid: 4625c86e8331b044ab0642f13bda1d9e, type: 3}
       propertyPath: playerEffect
