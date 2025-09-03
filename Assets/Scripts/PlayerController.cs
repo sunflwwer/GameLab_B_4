@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 
@@ -113,5 +113,12 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             GameManager.Instance.SpawnPlayer(); // 리스폰 호출
         }
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Clear"))
+        {
+            GameManager.Instance.StageClear();
+        }
     }
+
+
 }

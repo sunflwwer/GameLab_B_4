@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // 씬 로드용 네임스페이스
+using System.Collections;
 
 /// <summary>
 /// 게임 관리 및 플레이어 리스폰 관리 클래스 (싱글톤)
@@ -32,5 +33,27 @@ public class GameManager : MonoBehaviour
         DeathCount++;
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+    }
+
+    // 플레이어가 Clear 레이어에 닿았을 때 호출
+    public void StageClear()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name == "Stage1")
+        {
+            StartCoroutine(LoadNextStage("Stage2", 2f));
+        }
+        else if (currentScene.name == "Stage2")
+        {
+            StartCoroutine(LoadNextStage("Stage3", 2f));
+        }
+    }
+
+    // 코루틴으로 일정 시간 후 씬 로드
+    private IEnumerator LoadNextStage(string stageName, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(stageName);
     }
 }
