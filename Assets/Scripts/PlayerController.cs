@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float cameraDistance = 5f;            // ì¹´ë©”?¼ì? ìºë¦­??ê±°ë¦¬
 
     public Camera playerCamera;
-    public Material glassMaterial; // Glass »ö»ó ¸ŞÅ×¸®¾ó
+    //public Material glassMaterial; // Glass »ö»ó ¸ŞÅ×¸®¾ó
 
     Rigidbody rb;                                          // ?Œë ˆ?´ì–´ Rigidbody
     Vector2 moveInput;                                     // ?´ë™ ?…ë ¥ê°?
@@ -118,11 +118,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("ChangeToGlass"))
         {
-            Renderer rend = collision.gameObject.GetComponent<Renderer>();
-            if (rend != null && glassMaterial != null)
-            {
-                rend.material = glassMaterial;
-            }
+            Destroy(gameObject);
         }
     }
 }
