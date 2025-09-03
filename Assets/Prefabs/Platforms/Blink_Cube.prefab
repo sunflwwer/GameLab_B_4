@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7456743939092715614}
   - component: {fileID: 4211060159372682088}
   m_Layer: 0
-  m_Name: ToggleCube
+  m_Name: Blink_Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,4 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f74633a1f7a70b4c87f4404f7e3420a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interval: 3
+  onTime: 1
+  offTime: 2
+  startDelay: 0
+  hiddenAlpha: 0.1

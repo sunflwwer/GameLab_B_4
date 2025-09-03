@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CubeController : MonoBehaviour
+public class ObstacleController : MonoBehaviour
 {
     public bool isReverse = false; // 반전 여부
     public bool isMoveX = false;
@@ -39,8 +39,8 @@ public class CubeController : MonoBehaviour
         if (isMoveX)
         {
             // 시작 위치 기준 좌우로 이동
-            float moveX = Mathf.PingPong(Time.time * moveSpeed, moveRange) - (moveRange / 2);
             Vector3 newPosition = startPosition;
+            float moveX = Mathf.PingPong(Time.time * moveSpeed, moveRange) - (moveRange / 2);
             newPosition.x += moveX;
             transform.position = newPosition;
 

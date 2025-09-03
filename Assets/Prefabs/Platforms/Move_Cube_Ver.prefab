@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4104337497810597353, guid: 7c6a8309ab811e843aee4dbb2d7cfc19, type: 3}
       propertyPath: m_Size.x
-      value: 0.9
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4104337497810597353, guid: 7c6a8309ab811e843aee4dbb2d7cfc19, type: 3}
       propertyPath: m_Size.y
-      value: 0.9
+      value: 0.95
       objectReference: {fileID: 0}
     - target: {fileID: 4104337497810597353, guid: 7c6a8309ab811e843aee4dbb2d7cfc19, type: 3}
       propertyPath: m_Size.z
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875516262766607670, guid: 7c6a8309ab811e843aee4dbb2d7cfc19, type: 3}
       propertyPath: m_Name
-      value: Move_Block_Horizontal
+      value: Move_Cube_Ver
       objectReference: {fileID: 0}
     - target: {fileID: 8081188810006155381, guid: 7c6a8309ab811e843aee4dbb2d7cfc19, type: 3}
       propertyPath: m_LocalPosition.x
