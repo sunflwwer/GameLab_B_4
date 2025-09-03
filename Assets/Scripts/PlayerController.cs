@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
 /// ?Œë ˆ?´ì–´ ?´ë™ ë°?ì¹´ë©”???Œì „ ì»¨íŠ¸ë¡¤ëŸ¬
 /// </summary>
 public class PlayerController : MonoBehaviour
@@ -13,20 +12,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxPitch = 60f;                 // ì¹´ë©”??ìµœë? ê°ë„
     [SerializeField] float cameraDistance = 5f;            // ì¹´ë©”?¼ì? ìºë¦­??ê±°ë¦¬
 
-
-<<<<<<< HEAD
     public Camera playerCamera;
     public Material glassMaterial; // Glass »ö»ó ¸ŞÅ×¸®¾ó
-=======
-    public Camera playerCamera;                            // ?Œë ˆ?´ì–´ë¥??°ë¼?¤ë‹ˆ??ì¹´ë©”??
->>>>>>> 11e7603b2f4c06818ff97962027b412ff03bd653
-
 
     Rigidbody rb;                                          // ?Œë ˆ?´ì–´ Rigidbody
     Vector2 moveInput;                                     // ?´ë™ ?…ë ¥ê°?
     Vector2 lookInput;                                     // ë§ˆìš°???…ë ¥ê°?
     float cameraPitch = 0f;                                // ì¹´ë©”???í•˜ ê°ë„
-    
+
 
 
     void Awake()
@@ -72,6 +65,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
+
+
     void FixedUpdate()
     {
         ProcessMove();
@@ -83,13 +78,18 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+
     /// ì¹´ë©”??ê¸°ì??¼ë¡œ ?´ë™ ë°©í–¥ ë°˜í™˜
+    /// ì¹´ë©”??ê¸°ì??¼ë¡œ ?´ë™ ë°©í–¥ ë°˜í™˜
+
     /// </summary>
     public Vector3 GetMoveDirection()
     {
         Vector3 camForward = playerCamera.transform.forward;
         Vector3 camRight = playerCamera.transform.right;
 
+
+        camForward.y = 0; // ?˜í‰ ë°©í–¥ë§??¬ìš©
         camForward.y = 0; // ?˜í‰ ë°©í–¥ë§??¬ìš©
         camRight.y = 0;
         camForward.Normalize();
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// ?´ë™ ì²˜ë¦¬
     /// ?´ë™ ì²˜ë¦¬
     /// </summary>
     private void ProcessMove()
