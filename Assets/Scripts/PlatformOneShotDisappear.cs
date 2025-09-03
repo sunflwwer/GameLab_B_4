@@ -1,49 +1,63 @@
 using UnityEngine;
+using System.Collections;
 
+/// <summary>
+/// í”Œë ˆì´ì–´ê°€ ë‹¿ìœ¼ë©´ ì¼ì • ì‹œê°„ í›„ ì‚¬ë¼ì§€ê³ , ì¼ì • ì‹œê°„ í›„ ë‹¤ì‹œ ë‚˜íƒ€ë‚˜ëŠ” ì¼íšŒìš© í”Œë«í¼
+/// </summary>
 public class PlatformOneShotDisappear : MonoBehaviour
 {
-    [SerializeField] float disappearDelay = 0.6f;   // ¹â°í ³ª¼­ »ç¶óÁö±â±îÁö ½Ã°£
-    [SerializeField] float destroyDelay = 0.1f;     // Äİ¶óÀÌ´õ ²ö µÚ ¿ÏÀü »èÁ¦±îÁö ½Ã°£
-    [SerializeField] string playerTag = "Player";   // ÇÃ·¹ÀÌ¾î ÅÂ±×
+    [SerializeField] float disappearDelay = 0.6f;   // ì‚¬ë¼ì§€ê¸°ê¹Œì§€ì˜ ì§€ì—° ì‹œê°„
+    [SerializeField] float destroyDelay = 0.1f;     // ì˜¤ë¸Œì íŠ¸ ì‚­ì œê¹Œì§€ì˜ ì¶”ê°€ ì§€ì—° ì‹œê°„ (í˜„ì¬ ë¯¸ì‚¬ìš©)
+    [SerializeField] string playerTag = "Player";   // í”Œë ˆì´ì–´ íƒœê·¸
 
-    bool triggered;
-    Collider col;
-    Renderer[] renderers;
+    bool triggered;                                 // ì´ë¯¸ íŠ¸ë¦¬ê±°ëëŠ”ì§€ ì—¬ë¶€
+    Collider col;                                   // í”Œë«í¼ ì½œë¼ì´ë”
+    Renderer[] renderers;                           // í”Œë«í¼ ë Œë”ëŸ¬ë“¤
 
     void Awake()
     {
-        col = GetComponent<Collider>();
-        renderers = GetComponentsInChildren<Renderer>(true);
+        col = GetComponent<Collider>();                         // ì½œë¼ì´ë” ì»´í¬ë„ŒíŠ¸ ìºì‹±
+        renderers = GetComponentsInChildren<Renderer>(true);    // ëª¨ë“  ìì‹ ë Œë”ëŸ¬ ìºì‹±
     }
 
+    // í”Œë ˆì´ì–´ê°€ ì¶©ëŒí–ˆì„ ë•Œ í˜¸ì¶œ
     void OnCollisionEnter(Collision other)
     {
         if (!triggered && other.gameObject.CompareTag(playerTag))
         {
             triggered = true;
-            Invoke(nameof(DisappearNow), disappearDelay);
+            Invoke(nameof(DisappearNow), disappearDelay); // ì¼ì • ì‹œê°„ í›„ ì‚¬ë¼ì§
         }
     }
 
-    // ¸¸¾à ¹ßÆÇ Äİ¶óÀÌ´õ¸¦ Trigger·Î ¾µ °æ¿ì ÀÌ ¸Ş¼­µåµµ »ç¿ë °¡´É
+    // í”Œë ˆì´ì–´ê°€ íŠ¸ë¦¬ê±°ë¡œ ë‹¿ì•˜ì„ ë•Œ í˜¸ì¶œ
     void OnTriggerEnter(Collider other)
     {
         if (!triggered && other.gameObject.CompareTag(playerTag))
         {
             triggered = true;
-            Invoke(nameof(DisappearNow), disappearDelay);
+            Invoke(nameof(DisappearNow), disappearDelay); // ì¼ì • ì‹œê°„ í›„ ì‚¬ë¼ì§
         }
     }
 
+    // í”Œë«í¼ ì‚¬ë¼ì§ ì²˜ë¦¬
     void DisappearNow()
     {
-        // ´õ ÀÌ»ó ¹âÀ» ¼ö ¾øµµ·Ï Äİ¶óÀÌ´õ ºñÈ°¼º
-        if (col) col.enabled = false;
+        // ì˜¤ë¸Œì íŠ¸ ë¹„í™œì„±í™”
+        gameObject.SetActive(false);
 
-        // ½Ã°¢ÀûÀ¸·Îµµ ¹Ù·Î »ç¶óÁö°Ô ·»´õ·¯ ºñÈ°¼º
-        foreach (var r in renderers) r.enabled = false;
+        // ì¼ì • ì‹œê°„ í›„ ë‹¤ì‹œ í™œì„±í™” (respawn)
+        StartCoroutine(Respawn());
+    }
 
-        // ¾à°£ÀÇ ¿©À¯ µÚ ¿ÏÀü »èÁ¦
-        Destroy(gameObject, destroyDelay);
+    [SerializeField] float respawnTime = 3.0f; // ë‹¤ì‹œ ë‚˜íƒ€ë‚˜ê¸°ê¹Œì§€ì˜ ì‹œê°„
+
+    // ì¼ì • ì‹œê°„ í›„ í”Œë«í¼ì„ ë‹¤ì‹œ í™œì„±í™”
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnTime);
+
+        // ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
+        gameObject.SetActive(true);
     }
 }

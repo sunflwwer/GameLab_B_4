@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject playerPrefab;   // 플레이어 프리팹
     public Transform respawnPoint;    // 리스폰 위치(빈 오브젝트 등으로 설정)
+    public int DeathCount { get; private set; } = 0; // 죽음 횟수
 
     private void Awake()
     {
@@ -28,10 +29,7 @@ public class GameManager : MonoBehaviour
         if (playerPrefab != null && respawnPoint != null)
         {
             Instantiate(playerPrefab, respawnPoint.position, respawnPoint.rotation);
-        }
-        else
-        {
-
+            DeathCount++;
         }
     }
 

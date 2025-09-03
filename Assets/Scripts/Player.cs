@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int health = 100;
     public float fallThreshold = -10f; // 이 값보다 y좌표가 작아지면 낙사 처리
-
-
-
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

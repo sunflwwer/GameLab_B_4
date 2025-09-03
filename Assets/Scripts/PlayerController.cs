@@ -119,6 +119,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("ChangeToGlass"))
         {
             Destroy(gameObject);
+            GameManager.Instance.SpawnPlayer(); // 리스폰 호출
         }
     }
 }
