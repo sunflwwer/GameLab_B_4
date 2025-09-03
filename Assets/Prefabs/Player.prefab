@@ -334,7 +334,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerController: {fileID: 5120960257081410381}
+  abilityMaterials:
+  - {fileID: 2100000, guid: 7dc78346a6d74e64eba3c6a6d32b0fb2, type: 2}
+  - {fileID: 2100000, guid: 157698ed7b84c1a4c846d90f2042e61f, type: 2}
+  - {fileID: 2100000, guid: 380e7beb59f0d9d43a4e1a935f6ff856, type: 2}
+  - {fileID: 2100000, guid: 99f6876e941d40645bfa969bf9475924, type: 2}
+  - {fileID: 2100000, guid: 653005456c5c8214db62fd70a89c6eda, type: 2}
+  - {fileID: 2100000, guid: 211dbde45acbc1342bd56305320dc0ac, type: 2}
+  - {fileID: 2100000, guid: 7e2ea1ed71870d74c9b8c2333c45f93f, type: 2}
+  - {fileID: 2100000, guid: 123c0365fa98d134293d835a81c0e1fd, type: 2}
   jumpForce: 20
+  flashDistance: 5
 --- !u!114 &5120960257081410381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,4 +360,7 @@ MonoBehaviour:
   moveSpeed: 10
   rotationSpeed: 0.1
   cameraRotationSpeed: 0.05
+  minPitch: -30
+  maxPitch: 60
+  cameraDistance: 10
   playerCamera: {fileID: 2448682042958351134}

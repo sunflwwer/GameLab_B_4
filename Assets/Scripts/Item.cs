@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum ItemType
@@ -16,12 +17,23 @@ public class Item : MonoBehaviour
 {
     public ItemType itemType;
 
+    [SerializeField] float itemRespawnTime = 3.0f;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             other.GetComponent<PlayerAbility>().GiveAbility(itemType);
-            Destroy(gameObject);
+            StartCoroutine(RespawnItem());
         }
+    }
+
+    IEnumerator RespawnItem()
+    {
+        GetComponent<Renderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(itemRespawnTime);
+        GetComponent<Renderer>().enabled = true;
+        GetComponent<Collider>().enabled = true;
     }
 }
