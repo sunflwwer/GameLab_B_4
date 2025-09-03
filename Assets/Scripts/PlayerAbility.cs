@@ -7,14 +7,16 @@ public class PlayerAbility : MonoBehaviour
     [SerializeField] PlayerController PlayerController;
     [SerializeField] Material[] abilityMaterials;
     [SerializeField] float jumpForce = 20.0f;
+    [SerializeField] float flashDistance = 5.0f;
 
 
     MeshRenderer playerMaterial;
     Rigidbody rb;
-    
+
 
     bool hasDoubleJump = false;
     bool hasDash = false;
+    bool hasFlash = false;
 
     float initSpeedTime = 1.0f;
 
@@ -43,6 +45,23 @@ public class PlayerAbility : MonoBehaviour
         {
             StartCoroutine(DashCoroutine());
             hasDash = false;
+            changeAbilityMaterial();
+        }
+    }
+
+    void OnFlash()
+    {
+        if (hasFlash)
+        {
+            Vector3 flashDir = PlayerController.GetMoveDirection();
+            if (flashDir == Vector3.zero)
+            {
+                flashDir = transform.forward;
+            }
+
+            // 순간이동
+            transform.position += flashDir * flashDistance;
+            hasFlash = false;
             changeAbilityMaterial();
         }
     }
@@ -76,6 +95,10 @@ public class PlayerAbility : MonoBehaviour
                 hasDash = true;
                 changeAbilityMaterial();
                 break;
+            case ItemType.Flash:
+                hasFlash = true;
+                changeAbilityMaterial();
+                break;
             default:
                 break;
         }
@@ -83,9 +106,21 @@ public class PlayerAbility : MonoBehaviour
 
     void changeAbilityMaterial()
     {
-        if (hasDoubleJump && hasDash)
+        if (hasDoubleJump && hasFlash && hasDash)
         {
-            playerMaterial.material = abilityMaterials[(int)ItemType.Both];
+            playerMaterial.material = abilityMaterials[(int)ItemType.Triple];
+        }
+        else if (hasDoubleJump && hasFlash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.JumpFlash];
+        }
+        else if (hasDash && hasFlash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.DashFlash];
+        }
+        else if (hasDoubleJump && hasDash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.JumpDash];
         }
         else if (hasDoubleJump)
         {
@@ -94,6 +129,10 @@ public class PlayerAbility : MonoBehaviour
         else if (hasDash)
         {
             playerMaterial.material = abilityMaterials[(int)ItemType.Dash];
+        }
+        else if (hasFlash)
+        {
+            playerMaterial.material = abilityMaterials[(int)ItemType.Flash];
         }
         else
         {

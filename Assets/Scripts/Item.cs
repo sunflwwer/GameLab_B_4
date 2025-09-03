@@ -5,7 +5,11 @@ public enum ItemType
     Default,
     DoubleJump,
     Dash,
-    Both,
+    Flash,
+    JumpDash,
+    JumpFlash,
+    DashFlash,
+    Triple,
 }
 
 public class Item : MonoBehaviour
