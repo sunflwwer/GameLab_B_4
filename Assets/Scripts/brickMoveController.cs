@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class brickMoveController : MonoBehaviour
 {
-    public float distance = 1f;
+    public float distance = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,13 +15,13 @@ public class brickMoveController : MonoBehaviour
     {
 
     }
-    //플레이어와 충돌 후 떨어질때 로컬방향 앞으로 이동
-    void OnCollisionExit(Collision collision)
+
+    void OnTriggerEnter(Collider other)
     {
-        //bool에서 선택된 로컬방향으로 이동
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-         transform.Translate(Vector3.forward * distance);
+            // 플레이어와 충돌 시 로컬 방향으로 이동
+            transform.Translate(Vector3.forward * distance);
         }
     }
 }
