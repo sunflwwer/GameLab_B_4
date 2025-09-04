@@ -8019,6 +8019,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 73852205084983828, guid: bf83aefacf0a68448b2294f50d047db1, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6993099247660685456, guid: bf83aefacf0a68448b2294f50d047db1, type: 3}
       propertyPath: m_Name
       value: UI 3
