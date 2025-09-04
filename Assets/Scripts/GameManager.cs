@@ -102,12 +102,12 @@ public class GameManager : MonoBehaviour
 
         EnsureEventSystem();
 
-        finalClearPanel = GameObject.Find("UI/Canvas/ClearPanel");
+        finalClearPanel = GameObject.Find("UI 3/Canvas/Clear Text/ClearPanel");
         if (finalClearPanel != null)
         {
             finalClearPanel.SetActive(false); // 기본은 꺼두기
-            var hb = GameObject.Find("UI/Canvas/ClearPanel/HomeButton");
-            var eb = GameObject.Find("UI/Canvas/ClearPanel/ExitButton");
+            var hb = GameObject.Find("UI 3/Canvas/Clear Text/ClearPanel/MainButton");
+            var eb = GameObject.Find("UI 3/Canvas/Clear Text/ClearPanel/ExitButton");
             homeButton = hb ? hb.GetComponent<Button>() : null;
             exitButton = eb ? eb.GetComponent<Button>() : null;
 
