@@ -6,7 +6,9 @@ public enum EffectType
     Dash,
     Flash,
     Explosion,
-    Implosion
+    Implosion,
+    NextStage,
+    Clear
 }
 
 public class PlayerEffect : MonoBehaviour
@@ -16,16 +18,10 @@ public class PlayerEffect : MonoBehaviour
     [SerializeField] ParticleSystem flashParticle;
     [SerializeField] ParticleSystem explosionParticle;
     [SerializeField] ParticleSystem implosionParticle;
+    [SerializeField] ParticleSystem NextStageParticle;
+    [SerializeField] ParticleSystem ClearParticle;
 
-    private void Start()
-    {
-        if (explosionParticle != null)
-        {
-            // use unscaled time for explosion particle
-            ParticleSystem.MainModule main = explosionParticle.main;
-            main.useUnscaledTime = true;
-        }
-    }
+    
 
 
     public void TriggerParticle(EffectType type)
@@ -49,6 +45,12 @@ public class PlayerEffect : MonoBehaviour
                 break;
             case EffectType.Implosion:
                 implosionParticle.Play();
+                break;
+            case EffectType.NextStage:
+                NextStageParticle.Play();
+                break;
+            case EffectType.Clear:
+                ClearParticle.Play();
                 break;
             default:
                 break;

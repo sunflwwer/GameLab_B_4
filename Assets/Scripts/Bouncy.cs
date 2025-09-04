@@ -9,15 +9,17 @@ public class Bouncy : MonoBehaviour
     [SerializeField] float bounceForce = 20f;   // 튕기는 힘
 
     Rigidbody rb; // 플레이어 Rigidbody
+    GameManager gameManager;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameManager = GameManager.Instance;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") && !(gameManager.isRestarting || gameManager.isClearing))
         {
             // 모든 충돌 지점을 검사
             foreach (ContactPoint contact in collision.contacts)
