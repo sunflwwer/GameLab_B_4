@@ -72,6 +72,16 @@ public class UI : MonoBehaviour
     {
         if (clearText != null)
         {
+            // 큰 버전 숨기기
+            if (deathCountText != null) deathCountText.gameObject.SetActive(false);
+            if (timeText != null) timeText.gameObject.SetActive(false);
+            if (stageOneText != null) stageOneText.gameObject.SetActive(false);
+
+            // 작은 버전 켜기
+            if (deathCountTextSmall != null) deathCountTextSmall.gameObject.SetActive(true);
+            if (timeTextSmall != null) timeTextSmall.gameObject.SetActive(true);
+
+            // 클리어 텍스트 표시
             clearText.text = message;
             clearText.gameObject.SetActive(true);
         }
@@ -87,13 +97,14 @@ public class UI : MonoBehaviour
             if (stageOneText != null) stageOneText.gameObject.SetActive(false);
             if (clearText != null) clearText.gameObject.SetActive(false);
 
-            // 작은 버전 켜기
-            if (deathCountTextSmall != null) deathCountTextSmall.gameObject.SetActive(true);
-            if (timeTextSmall != null) timeTextSmall.gameObject.SetActive(true);
+            // 작은 버전도 숨기기 (FAIL에서는 작은 카운터 표시 안 함)
+            if (deathCountTextSmall != null) deathCountTextSmall.gameObject.SetActive(false);
+            if (timeTextSmall != null) timeTextSmall.gameObject.SetActive(false);
 
             // Fail 텍스트 표시
             failText.text = message;
             failText.gameObject.SetActive(true);
         }
     }
+
 }

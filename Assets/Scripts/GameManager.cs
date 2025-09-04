@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-
+    private bool shouldCountTime = false; // 시간 카운트 여부
 
     // 인스펙터 할당 제거
     private GameObject finalClearPanel;
@@ -56,27 +56,40 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         isRestarting = false;
         isClearing = false;
-        PlayTime = 0f;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // 0) EventSystem 안전장치
+        // 씬 이름에 따라 시간 리셋/카운트 여부 결정
+        var sceneName = scene.name;
+        if (sceneName == "Start")
+        {
+            // Start에서는 시간 리셋 + 카운트 중지
+            PlayTime = 0f;
+            shouldCountTime = false;
+        }
+        else if (sceneName == "Stage1" || sceneName == "Stage2" || sceneName == "Stage3")
+        {
+            // 스테이지 진입 시 카운트 시작
+            shouldCountTime = true;
+        }
+        else
+        {
+            // 기타 씬은 기본적으로 카운트 (필요 시 조정)
+            shouldCountTime = true;
+        }
+
         EnsureEventSystem();
 
-        // 1) UI 경로로 패널/버튼 찾기 (Hierarchy 구조 기준)
         finalClearPanel = GameObject.Find("UI/Canvas/ClearPanel");
         if (finalClearPanel != null)
         {
             finalClearPanel.SetActive(false); // 기본은 꺼두기
-
             var hb = GameObject.Find("UI/Canvas/ClearPanel/HomeButton");
             var eb = GameObject.Find("UI/Canvas/ClearPanel/ExitButton");
-
             homeButton = hb ? hb.GetComponent<Button>() : null;
             exitButton = eb ? eb.GetComponent<Button>() : null;
 
-            // 2) 리스너 초기화 후 재연결 (중복 방지)
             if (homeButton != null)
             {
                 homeButton.onClick.RemoveAllListeners();
@@ -90,13 +103,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+
     private void Update()
     {
-        if (!isRestarting && !isClearing)
+        // 카운트 조건: 진행중 && 대기/재시작 아님 && 카운트 허용 상태
+        if (shouldCountTime && !isRestarting && !isClearing)
         {
             PlayTime += Time.deltaTime;
         }
     }
+
 
     public void SpawnPlayer()
     {
@@ -109,8 +126,13 @@ public class GameManager : MonoBehaviour
 
         DeathCount++;
         ExplodePlayer();
+
+        // 바로 카운트 중지되도록 즉시 플래그 설정
+        isRestarting = true;
+
         StartCoroutine(RestartCurrentSceneAfterRealtime(2f));
     }
+
 
     private void ExplodePlayer()
     {
@@ -126,13 +148,12 @@ public class GameManager : MonoBehaviour
         isRestarting = true;
         yield return new WaitForSecondsRealtime(delay);
 
-
         if (finalClearPanel != null) finalClearPanel.SetActive(false);
 
-       
         Scene current = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(current.name);
+        SceneManager.LoadScene(current.name); // 시간 유지
     }
+
 
     public void StageClear()
     {
@@ -156,7 +177,6 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(stageName);
     }
 
-    // 최종 클리어: 여기서만 패널 켬
     public void FinalClear()
     {
         if (isClearing || isRestarting) return;
@@ -168,18 +188,34 @@ public class GameManager : MonoBehaviour
         var playerController = FindObjectOfType<PlayerController>();
         if (playerController != null) playerController.enabled = false;
 
+        if (UI.Instance != null)
+            UI.Instance.ShowClearText("Stage Clear!");
+
+        // Stage3 최종 클리어 후, 카운트 중지
+        shouldCountTime = false;
+
         if (finalClearPanel != null) finalClearPanel.SetActive(true);
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
+
+
+
+
     // 버튼 핸들러
     public void OnClickHomeButton()
     {
         Time.timeScale = 1f;
+
+        // Start로 갈 때 명시적으로 리셋 + 카운트 중지
+        PlayTime = 0f;
+        shouldCountTime = false;
+
         SceneManager.LoadScene("Start");
     }
+
 
     public void OnClickExitButton()
     {
