@@ -33,7 +33,7 @@ public class PlayerAbility : MonoBehaviour
     {
         // 현재 가속도 초기화 후 impulse 힘 적용
         // 아이템이 있을때에만 점프 가능
-        if (hasDoubleJump && !gameManager.isRestarting)
+        if (hasDoubleJump && !(gameManager.isRestarting || gameManager.isClearing))
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -45,7 +45,7 @@ public class PlayerAbility : MonoBehaviour
 
     void OnDash()
     {
-        if (hasDash && !gameManager.isRestarting)
+        if (hasDash && !(gameManager.isRestarting || gameManager.isClearing))
         {
             StartCoroutine(DashCoroutine());
             playerEffect.TriggerParticle(EffectType.Dash);
@@ -56,7 +56,7 @@ public class PlayerAbility : MonoBehaviour
 
     void OnFlash()
     {
-        if (hasFlash && !gameManager.isRestarting)
+        if (hasFlash && !(gameManager.isRestarting || gameManager.isClearing))
         {
             Vector3 flashDir = PlayerController.GetMoveDirection();
             if (flashDir == Vector3.zero)
