@@ -3,21 +3,28 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.UI; // 버튼 제어
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int DeathCount { get; private set; } = 0;
-    public float PlayTime { get; private set; } = 0f;
+
 
     // 인스펙터 할당 제거
     private GameObject finalClearPanel;
     private Button homeButton;
     private Button exitButton;
 
-    private bool isRestarting = false;
+    public int DeathCount { get; private set; } = 0;   // 죽음 횟수
+    public float PlayTime { get; private set; } = 0f;  // 현재 씬의 플레이 시간(초)
+    
+
+
+    public bool isRestarting = false;
     private bool isClearing = false;
+    
 
     private void Awake()
     {
@@ -31,6 +38,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 
     private void OnEnable()
     {
@@ -99,18 +108,29 @@ public class GameManager : MonoBehaviour
             UI.Instance.ShowFailText("Fail...");
 
         DeathCount++;
+        ExplodePlayer();
         StartCoroutine(RestartCurrentSceneAfterRealtime(2f));
+    }
+
+    private void ExplodePlayer()
+    {
+        PlayerEffect effect = FindFirstObjectByType<PlayerEffect>();
+        if (effect != null)
+        {
+            effect.TriggerParticle(EffectType.Explosion);
+        }
     }
 
     private IEnumerator RestartCurrentSceneAfterRealtime(float delay)
     {
         isRestarting = true;
-        Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(delay);
+
 
         if (finalClearPanel != null) finalClearPanel.SetActive(false);
 
-        var current = SceneManager.GetActiveScene();
+       
+        Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }
 

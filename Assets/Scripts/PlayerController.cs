@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public Camera playerCamera;
 
-
+    GameManager gameManager;
     Rigidbody rb;
     Vector2 moveInput;
     Vector2 lookInput;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
+        gameManager = GameManager.Instance;
     }
 
     void OnMove(InputValue value)
@@ -66,11 +66,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gameManager.isRestarting) return;
         ProcessMove();
     }
 
     private void LateUpdate()
     {
+        if (gameManager.isRestarting) return;
         ProcessLook();
     }
 

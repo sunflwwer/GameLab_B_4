@@ -13,6 +13,7 @@ public class PlayerAbility : MonoBehaviour
 
     MeshRenderer playerMaterial;
     Rigidbody rb;
+    GameManager gameManager;
 
 
     bool hasDoubleJump = false;
@@ -25,13 +26,14 @@ public class PlayerAbility : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         playerMaterial = GetComponent<MeshRenderer>();
+        gameManager = GameManager.Instance;
     }
 
     void OnJump()
     {
-        // ÇöÀç °¡¼Óµµ ÃÊ±âÈ­ ÈÄ impulse Èû Àû¿ë
-        // ¾ÆÀÌÅÛÀÌ ÀÖÀ»¶§¿¡¸¸ Á¡ÇÁ °¡´É
-        if (hasDoubleJump)
+        // í˜„ì¬ ê°€ì†ë„ ì´ˆê¸°í™” í›„ impulse í˜ ì ìš©
+        // ì•„ì´í…œì´ ìˆì„ë•Œì—ë§Œ ì í”„ ê°€ëŠ¥
+        if (hasDoubleJump && !gameManager.isRestarting)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
@@ -43,7 +45,7 @@ public class PlayerAbility : MonoBehaviour
 
     void OnDash()
     {
-        if (hasDash)
+        if (hasDash && !gameManager.isRestarting)
         {
             StartCoroutine(DashCoroutine());
             playerEffect.TriggerParticle(EffectType.Dash);
@@ -54,7 +56,7 @@ public class PlayerAbility : MonoBehaviour
 
     void OnFlash()
     {
-        if (hasFlash)
+        if (hasFlash && !gameManager.isRestarting)
         {
             Vector3 flashDir = PlayerController.GetMoveDirection();
             if (flashDir == Vector3.zero)
@@ -62,7 +64,7 @@ public class PlayerAbility : MonoBehaviour
                 flashDir = transform.forward;
             }
 
-            // ¼ø°£ÀÌµ¿
+            // ìˆœê°„ì´ë™
             playerEffect.TriggerParticle(EffectType.Flash);
             transform.position += flashDir * flashDistance;
             hasFlash = false;
@@ -78,10 +80,10 @@ public class PlayerAbility : MonoBehaviour
             dashDir = transform.forward;
         }
 
-        // ´ë½Ã ¼Óµµ Á÷Á¢ ¼³Á¤
+        // ëŒ€ì‹œ ì†ë„ ì§ì ‘ ì„¤ì •
         rb.linearVelocity = dashDir * jumpForce;
 
-        // ÂªÀº ½Ã°£ ÈÄ ¼öÆò ¼Óµµ ÃÊ±âÈ­
+        // ì§§ì€ ì‹œê°„ í›„ ìˆ˜í‰ ì†ë„ ì´ˆê¸°í™”
         yield return new WaitForSeconds(initSpeedTime);
 
         rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
