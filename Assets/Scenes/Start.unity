@@ -1252,21 +1252,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 160769566925517051, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6123864037499367956, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7574742498249771909, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
       propertyPath: m_Name
       value: Loot Drop
       objectReference: {fileID: 0}
     - target: {fileID: 8973706145815787539, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.18
+      value: 3.68
       objectReference: {fileID: 0}
     - target: {fileID: 8973706145815787539, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.93
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 8973706145815787539, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.86
       objectReference: {fileID: 0}
     - target: {fileID: 8973706145815787539, guid: b73edc6a4549bdb45badcbe99d0f02fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1810,6 +1818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isRestarting: 0
+  isClearing: 0
 --- !u!4 &1799166484
 Transform:
   m_ObjectHideFlags: 0
