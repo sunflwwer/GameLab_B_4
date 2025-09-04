@@ -47,10 +47,10 @@ public class PlatformOneShotDisappear : MonoBehaviour
         gameObject.SetActive(false);
 
         // 일정 시간 후 다시 활성화 (respawn)
-        StartCoroutine(Respawn());
+        //StartCoroutine(Respawn());
     }
 
-    [SerializeField] float respawnTime = 3.0f; // 다시 나타나기까지의 시간
+/*    [SerializeField] float respawnTime = 3.0f; // 다시 나타나기까지의 시간
 
     // 일정 시간 후 플랫폼을 다시 활성화
     IEnumerator Respawn()
@@ -59,5 +59,5 @@ public class PlatformOneShotDisappear : MonoBehaviour
 
         // 오브젝트 활성화
         gameObject.SetActive(true);
-    }
+    }*/
 }
