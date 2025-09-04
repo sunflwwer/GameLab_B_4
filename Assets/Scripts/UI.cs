@@ -55,7 +55,7 @@ public class UI : MonoBehaviour
             timeText.text = " Time: " + formattedTime;
         // === 추가: 큰 별 카운트 표시 ===
         if (starCountText != null)
-            starCountText.text = $"Star: {gm.StarCount} / 10";   // ★: n / 10 형태
+            starCountText.text = $"Star: {gm.StarCount} / 40";   // ★: n / 10 형태
 
         // 작은 버전 텍스트 갱신
         if (deathCountTextSmall != null)
