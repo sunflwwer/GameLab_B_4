@@ -66,13 +66,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (gameManager.isRestarting) return;
+        if (gameManager.isRestarting || gameManager.isClearing) return;
         ProcessMove();
     }
 
     private void LateUpdate()
     {
-        if (gameManager.isRestarting) return;
+        if (gameManager.isRestarting || gameManager.isClearing) return;
         ProcessLook();
     }
 

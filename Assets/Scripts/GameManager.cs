@@ -19,12 +19,12 @@ public class GameManager : MonoBehaviour
 
     public int DeathCount { get; private set; } = 0;   // 죽음 횟수
     public float PlayTime { get; private set; } = 0f;  // 현재 씬의 플레이 시간(초)
-    
+
 
 
     public bool isRestarting = false;
-    private bool isClearing = false;
-    
+    public bool isClearing = false;
+
 
     private void Awake()
     {
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+
 
     private void OnEnable()
     {
@@ -143,6 +143,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void NextEffect()
+    {
+        PlayerEffect effect = FindFirstObjectByType<PlayerEffect>();
+        if (effect != null)
+        {
+            Debug.Log("Next Stage Effect Triggered");
+            effect.TriggerParticle(EffectType.NextStage);
+        }
+    }
+
+    private void ClearEffect()
+    {
+        PlayerEffect effect = FindFirstObjectByType<PlayerEffect>();
+        if (effect != null)
+        {
+            effect.TriggerParticle(EffectType.Clear);
+        }
+    }
+
     private IEnumerator RestartCurrentSceneAfterRealtime(float delay)
     {
         isRestarting = true;
@@ -159,7 +178,9 @@ public class GameManager : MonoBehaviour
     {
         if (isClearing || isRestarting) return;
 
-        var currentScene = SceneManager.GetActiveScene();
+        NextEffect();
+        Scene currentScene = SceneManager.GetActiveScene();
+
         if (currentScene.name == "Stage1") StartCoroutine(LoadNextStageAfterRealtime("Stage2", 2f));
         else if (currentScene.name == "Stage2") StartCoroutine(LoadNextStageAfterRealtime("Stage3", 2f));
     }
@@ -171,9 +192,9 @@ public class GameManager : MonoBehaviour
         if (UI.Instance != null)
             UI.Instance.ShowClearText("Stage Clear!");
 
-        Time.timeScale = 0f;
+
         yield return new WaitForSecondsRealtime(delay);
-        Time.timeScale = 1f;
+
         SceneManager.LoadScene(stageName);
     }
 
@@ -182,16 +203,17 @@ public class GameManager : MonoBehaviour
         if (isClearing || isRestarting) return;
         isClearing = true;
 
-        var playerInput = FindObjectOfType<PlayerInput>();
+        var playerInput = FindFirstObjectByType<PlayerInput>();
         if (playerInput != null) playerInput.enabled = false;
 
-        var playerController = FindObjectOfType<PlayerController>();
+        var playerController = FindFirstObjectByType<PlayerController>();
         if (playerController != null) playerController.enabled = false;
 
         if (UI.Instance != null)
             UI.Instance.ShowClearText("Stage Clear!");
 
         // Stage3 최종 클리어 후, 카운트 중지
+        ClearEffect();
         shouldCountTime = false;
 
         if (finalClearPanel != null) finalClearPanel.SetActive(true);
@@ -228,7 +250,7 @@ public class GameManager : MonoBehaviour
     // EventSystem이 없으면 만들어줌 (Input System 환경 대응)
     private void EnsureEventSystem()
     {
-        if (FindObjectOfType<UnityEngine.EventSystems.EventSystem>() == null)
+        if (FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>() == null)
         {
             var es = new GameObject("EventSystem");
             es.AddComponent<UnityEngine.EventSystems.EventSystem>();
