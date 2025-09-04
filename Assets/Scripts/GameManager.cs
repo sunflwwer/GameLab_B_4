@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
         PlayerEffect effect = FindFirstObjectByType<PlayerEffect>();
         if (effect != null)
         {
-            Debug.Log("Next Stage Effect Triggered");
+            
             effect.TriggerParticle(EffectType.NextStage);
         }
     }
@@ -241,6 +241,7 @@ public class GameManager : MonoBehaviour
     public void CollectStar(GameObject item)
     {
         StarCount++;
+        
         if (item != null)
             Destroy(item);
     }

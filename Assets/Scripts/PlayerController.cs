@@ -118,11 +118,17 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.StageClear();
         }
-        // === 추가: 아이템 획득 ===
-        if (collision.gameObject.CompareTag("Item"))
+        
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Item"))
         {
-            GameManager.Instance.CollectStar(collision.gameObject);
+            GameManager.Instance.CollectStar(other.gameObject);
         }
+
 
     }
 
