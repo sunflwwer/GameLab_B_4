@@ -6,8 +6,15 @@ public class UI : MonoBehaviour
 {
     public static UI Instance; // 싱글톤 인스턴스
 
+    [Header("큰 버전 UI")]
     public TextMeshProUGUI deathCountText;
     public TextMeshProUGUI timeText;
+
+    [Header("작은 버전 UI (기본 비활성화)")]
+    public TextMeshProUGUI deathCountTextSmall;
+    public TextMeshProUGUI timeTextSmall;
+
+    [Header("기타 UI")]
     public TextMeshProUGUI stageOneText;
     public TextMeshProUGUI clearText;
     public TextMeshProUGUI failText;
@@ -37,8 +44,17 @@ public class UI : MonoBehaviour
 
         string formattedTime = gm.PlayTime.ToString("F3");
 
-        deathCountText.text = "Deaths: " + gm.DeathCount;
-        timeText.text = "Time: " + formattedTime;
+        // 큰 버전 텍스트 갱신
+        if (deathCountText != null)
+            deathCountText.text = "Deaths: " + gm.DeathCount;
+        if (timeText != null)
+            timeText.text = "Time: " + formattedTime;
+
+        // 작은 버전 텍스트 갱신
+        if (deathCountTextSmall != null)
+            deathCountTextSmall.text = "Deaths: " + gm.DeathCount;
+        if (timeTextSmall != null)
+            timeTextSmall.text = "Time: " + formattedTime;
     }
 
     IEnumerator ShowStageOneText() // 스테이지 알림 텍스트 코루틴
@@ -65,11 +81,17 @@ public class UI : MonoBehaviour
     {
         if (failText != null)
         {
-            deathCountText.gameObject.SetActive(false);
-            timeText.gameObject.SetActive(false);
-            stageOneText.gameObject.SetActive(false);
-            clearText.gameObject.SetActive(false);
+            // 큰 버전 숨기기
+            if (deathCountText != null) deathCountText.gameObject.SetActive(false);
+            if (timeText != null) timeText.gameObject.SetActive(false);
+            if (stageOneText != null) stageOneText.gameObject.SetActive(false);
+            if (clearText != null) clearText.gameObject.SetActive(false);
 
+            // 작은 버전 켜기
+            if (deathCountTextSmall != null) deathCountTextSmall.gameObject.SetActive(true);
+            if (timeTextSmall != null) timeTextSmall.gameObject.SetActive(true);
+
+            // Fail 텍스트 표시
             failText.text = message;
             failText.gameObject.SetActive(true);
         }
