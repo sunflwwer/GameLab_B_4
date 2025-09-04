@@ -17,20 +17,31 @@ public class PlayerEffect : MonoBehaviour
     [SerializeField] ParticleSystem explosionParticle;
     [SerializeField] ParticleSystem implosionParticle;
 
+    private void Start()
+    {
+        if (explosionParticle != null)
+        {
+            // use unscaled time for explosion particle
+            ParticleSystem.MainModule main = explosionParticle.main;
+            main.useUnscaledTime = true;
+        }
+    }
+
+
     public void TriggerParticle(EffectType type)
     {
         switch (type)
         {
             case EffectType.Jump:
-                // ´õºí Á¡ÇÁ ÆÄÆ¼Å¬ È¿°ú ½ÇÇà
+                // ë”ë¸” ì í”„ íŒŒí‹°í´ íš¨ê³¼ ì‹¤í–‰
                 jumpParticle.Play();
                 break;
             case EffectType.Dash:
-                // ´ë½Ã ÆÄÆ¼Å¬ È¿°ú ½ÇÇà
+                // ëŒ€ì‹œ íŒŒí‹°í´ íš¨ê³¼ ì‹¤í–‰
                 dashParticle.Play();
                 break;
             case EffectType.Flash:
-                // ÇÃ·¡½Ã ÆÄÆ¼Å¬ È¿°ú ½ÇÇà
+                // í”Œë˜ì‹œ íŒŒí‹°í´ íš¨ê³¼ ì‹¤í–‰
                 flashParticle.Play();
                 break;
             case EffectType.Explosion:

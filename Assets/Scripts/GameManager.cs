@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class GameManager : MonoBehaviour
 
     public int DeathCount { get; private set; } = 0;   // 죽음 횟수
     public float PlayTime { get; private set; } = 0f;  // 현재 씬의 플레이 시간(초)
+    
 
-    private bool isRestarting = false;
+    public bool isRestarting = false;
     private bool isClearing = false;
+    
 
 
     private void Awake()
@@ -25,6 +28,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    
 
     private void OnEnable()
     {
@@ -70,15 +75,24 @@ public class GameManager : MonoBehaviour
 
         // 죽는 순간 DeathCount +1 (UI는 즉시 +1 상태를 보게 됨)
         DeathCount++;
+        ExplodePlayer();
         StartCoroutine(RestartCurrentSceneAfterRealtime(2f));
+    }
+
+    private void ExplodePlayer()
+    {
+        PlayerEffect effect = FindFirstObjectByType<PlayerEffect>();
+        if (effect != null)
+        {
+            effect.TriggerParticle(EffectType.Explosion);
+        }
     }
 
     private IEnumerator RestartCurrentSceneAfterRealtime(float delay)
     {
         isRestarting = true;
-        Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(delay);
-        var current = SceneManager.GetActiveScene();
+        Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }
 
