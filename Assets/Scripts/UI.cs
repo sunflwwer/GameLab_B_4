@@ -50,9 +50,9 @@ public class UI : MonoBehaviour
 
         // 큰 버전 텍스트 갱신
         if (deathCountText != null)
-            deathCountText.text = "Deaths: " + gm.DeathCount;
+            deathCountText.text = " Deaths: " + gm.DeathCount;
         if (timeText != null)
-            timeText.text = "Time: " + formattedTime;
+            timeText.text = " Time: " + formattedTime;
         // === 추가: 큰 별 카운트 표시 ===
         if (starCountText != null)
             starCountText.text = $"Star: {gm.StarCount} / 10";   // ★: n / 10 형태

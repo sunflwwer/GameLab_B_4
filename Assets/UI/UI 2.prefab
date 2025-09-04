@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1766583186311642579
 RectTransform:
   m_ObjectHideFlags: 0
@@ -564,8 +564,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathCountText: {fileID: 2714094868475921656}
   timeText: {fileID: 6577077566490612180}
+  starCountText: {fileID: 0}
   deathCountTextSmall: {fileID: 8921787977871639209}
   timeTextSmall: {fileID: 1726670420976209545}
+  starCountTextSmall: {fileID: 0}
   stageOneText: {fileID: 366031364013877963}
   clearText: {fileID: 4667866265947422064}
   failText: {fileID: 73852205084983828}
@@ -586,7 +588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8536562280917155485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -858,7 +860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4132587519813027926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1039,7 +1041,7 @@ Transform:
   m_GameObject: {fileID: 6993099247660685456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.41209, y: 3.9541442, z: -9.051934}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

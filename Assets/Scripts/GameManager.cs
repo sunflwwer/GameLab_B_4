@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
         isClearing = true;
 
         if (UI.Instance != null)
-            UI.Instance.ShowClearText("Stage Clear!");
+            UI.Instance.ShowClearText("Clear!");
 
 
         yield return new WaitForSecondsRealtime(delay);
@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
         if (playerController != null) playerController.enabled = false;
 
         if (UI.Instance != null)
-            UI.Instance.ShowClearText("Stage Clear!");
+            UI.Instance.ShowClearText("Clear!");
 
 
         // === 추가: 다음에 Start 씬 들어갈 때 별 리셋되도록 표시 ===
