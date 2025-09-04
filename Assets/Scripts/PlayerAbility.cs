@@ -47,7 +47,14 @@ public class PlayerAbility : MonoBehaviour
     {
         if (hasDash && !(gameManager.isRestarting || gameManager.isClearing))
         {
-            StartCoroutine(DashCoroutine());
+            Vector3 dashDir = PlayerController.GetMoveDirection();
+            if (dashDir == Vector3.zero)
+            {
+                dashDir = transform.forward;
+            }
+
+            // 대시 속도 직접 설정
+            rb.linearVelocity = dashDir * jumpForce;
             playerEffect.TriggerParticle(EffectType.Dash);
             hasDash = false;
             changeAbilityMaterial();
@@ -72,22 +79,6 @@ public class PlayerAbility : MonoBehaviour
         }
     }
 
-    IEnumerator DashCoroutine()
-    {
-        Vector3 dashDir = PlayerController.GetMoveDirection();
-        if (dashDir == Vector3.zero)
-        {
-            dashDir = transform.forward;
-        }
-
-        // 대시 속도 직접 설정
-        rb.linearVelocity = dashDir * jumpForce;
-
-        // 짧은 시간 후 수평 속도 초기화
-        yield return new WaitForSeconds(initSpeedTime);
-
-        rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
-    }
 
     public void GiveAbility(ItemType itemType)
     {

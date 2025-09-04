@@ -27,6 +27,7 @@ public class Bouncy : MonoBehaviour
                 // 충돌 표면의 법선이 위쪽을 향할 때만 튀게 함
                 if (Vector3.Dot(contact.normal, Vector3.up) > 0.7f)
                 {
+                    rb.linearVelocity = Vector3.zero; // 현재 속도 초기화
                     rb.AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
                     playerEffect.TriggerParticle(EffectType.Jump);
                     break;
