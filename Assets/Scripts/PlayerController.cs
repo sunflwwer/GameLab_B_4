@@ -118,6 +118,12 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.StageClear();
         }
+        // === 추가: 아이템 획득 ===
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            GameManager.Instance.CollectStar(collision.gameObject);
+        }
+
     }
 
 

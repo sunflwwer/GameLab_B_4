@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     private bool shouldCountTime = false; // 시간 카운트 여부
 
+    // === 추가: 별 카운트 & 리셋 플래그 ===
+    public int StarCount { get; private set; } = 0;
+    private bool resetStarsOnNextStart = false;
+
     // 인스펙터 할당 제거
     private GameObject finalClearPanel;
     private Button homeButton;
@@ -67,6 +71,13 @@ public class GameManager : MonoBehaviour
             // Start에서는 시간 리셋 + 카운트 중지
             PlayTime = 0f;
             shouldCountTime = false;
+
+            // === 추가: Stage3 클리어 후 Start로 왔을 때만 별 리셋 ===
+            if (resetStarsOnNextStart)
+            {
+                StarCount = 0;
+                resetStarsOnNextStart = false;
+            }
         }
         else if (sceneName == "Stage1" || sceneName == "Stage2" || sceneName == "Stage3")
         {
@@ -191,6 +202,10 @@ public class GameManager : MonoBehaviour
         if (UI.Instance != null)
             UI.Instance.ShowClearText("Stage Clear!");
 
+
+        // === 추가: 다음에 Start 씬 들어갈 때 별 리셋되도록 표시 ===
+        resetStarsOnNextStart = true;
+
         // Stage3 최종 클리어 후, 카운트 중지
         shouldCountTime = false;
 
@@ -200,7 +215,13 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
     }
 
-
+    // === 추가: 아이템 획득 API ===
+    public void CollectStar(GameObject item)
+    {
+        StarCount++;
+        if (item != null)
+            Destroy(item);
+    }
 
 
 
